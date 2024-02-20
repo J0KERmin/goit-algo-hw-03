@@ -2,21 +2,29 @@
 from datetime import datetime
 
 def get_days_from_today(date):
-    # Перетворення рядка дати у форматі 'РРРР-ММ-ДД' у об'єкт datetime
-    date_obj = datetime.strptime(date, '%Y-%m-%d')
-    
-    # Отримання поточної дати
-    current_date = datetime.today()
-    
-    # Розрахунок різниці між поточною датою та заданою датою
-    delta = current_date - date_obj
-    
-    # Повернення різниці у днях як ціле число
-    return delta.days
+    try:
+        # Перетворення рядка дати у форматі 'РРРР-ММ-ДД' у об'єкт datetime
+        date_obj = datetime.strptime(date, '%Y-%m-%d')
+        
+        # Отримання поточної дати
+        current_date = datetime.today()
+        
+        # Розрахунок різниці між поточною датою та заданою датою
+        delta = current_date - date_obj
+        
+        # Повернення різниці у днях як ціле число
+        return delta.days
+    except ValueError:
+        # Виняток, який виникає, якщо рядок дати не відповідає формату 'РРРР-ММ-ДД'
+        print("Неправильний формат дати. Введіть дату у форматі РРРР-ММ-ДД.")
+        return None
 
 # Приклад використання функції
 date = input('Введіть дату в форматі РРРР-ММ-ДД: ')
-print("Кількість днів від заданої дати до поточної:", get_days_from_today(date))
+days = get_days_from_today(date)
+if days is not None:
+    print("Кількість днів від заданої дати до поточної:", days)
+
 
 # 2:
 import random
